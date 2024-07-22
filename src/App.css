@@ -12,6 +12,7 @@
 .input-field, .file-input {
   padding: 10px;
   margin: 10px;
+  width:400px
 }
 
 .button {
@@ -41,6 +42,16 @@
   border-radius: 5px;
   width: 80%;
   background-color: #f9f9f9;
+}
+.answer pre {
+  white-space: pre-wrap; /* Ensure text wraps within the container */
+  word-wrap: break-word; /* Break long words if necessary */
+  max-width: 100%; /* Ensure pre does not exceed container width */
+  overflow-x: auto; /* Allow horizontal scroll if content overflows */
+  padding: 10px; /* Optional: add padding for better readability */
+  background-color: #f4f4f4; /* Optional: background color */
+  border: 1px solid #ccc; /* Optional: border around pre */
+  border-radius: 3px; /* Optional: rounded corners for pre */
 }
 
 .loading-screen {

@@ -42,6 +42,7 @@ function App() {
   };
 
   const fetchAnswer = () => {
+    setIsLoading(true);
     fetch('http://127.0.01:5000/api/query', {
       method: 'POST',
       headers: {
@@ -50,7 +51,10 @@ function App() {
       body: JSON.stringify({ query }),
     })
       .then(response => response.json())
-      .then(data => setAnswer(data.answer))
+      .then(data => {
+        setIsLoading(false);
+        setAnswer(data.answer)
+      })
       .catch(error => console.error('Error:', error));
   };
 
@@ -58,7 +62,16 @@ function App() {
     <div className="App">
       <h1>Document Query System</h1>
       
+      
+      
+      <div className="upload-section">
+        Step 1: 
+        <input type="file" onChange={handleFileChange} className="file-input" />
+        <button onClick={handleUpload} className="button">Upload</button>
+        <p className="message">{message}</p>
+      </div>
       <div className="query-section">
+        Step 2:
         <input
           type="text"
           value={query}
@@ -69,18 +82,12 @@ function App() {
         <button onClick={fetchAnswer} className="button">Fetch Answer</button>
       </div>
       
-      <div className="upload-section">
-        <input type="file" onChange={handleFileChange} className="file-input" />
-        <button onClick={handleUpload} className="button">Upload</button>
-        <p className="message">{message}</p>
-      </div>
-      
-      <pre className="answer">{answer}</pre>
+      <div className="answer"><pre>{answer}</pre></div>
 
       {isLoading && (
         <div className="loading-screen">
           <div className="loading-spinner"></div>
-          <p>Uploading file, please wait...</p>
+          <p>Please wait...</p>
         </div>
       )}
     </div>
